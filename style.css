@@ -41,6 +41,7 @@ body{
     margin-left: 4px;
     margin-top: 18px;
     color: #ffffff;
+    cursor: pointer;
 }
 
 .mark {
