@@ -58,7 +58,7 @@ const setCounterToZero = () => {
     return notificationCountElement.textContent = totalItems
 }
 
-const itemObject = (el) => {
+const itemObjectHTML = (el) => {
     el.querySelector(".item__content").classList.remove("active")
     el.querySelector(".item__content").classList.add("inactive")
     el.querySelector(".bullet").classList.add("seen")
@@ -66,19 +66,20 @@ const itemObject = (el) => {
     el.querySelector(".item__message--text")?.classList.add("active-text")
 }
 
-
+// Click listener
 itemsLoadedList.forEach(el => {
     el.addEventListener("click", () => {
         if (el.querySelector(".item__content").classList.contains("active")) {
             decreaseCounter()
         }
-        itemObject(el)
+        itemObjectHTML(el)
     })
 })
 
+// Click listener
 markElement.addEventListener("click", () => {
     setCounterToZero()
     itemsLoadedList.forEach(item => {
-        itemObject(item)
+        itemObjectHTML(item)
     })
 });
