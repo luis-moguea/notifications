@@ -1,181 +1,84 @@
 import data from './data.json' assert { type: 'json' };
 
-const container = document.querySelector("#container")
+const container = document.querySelector("#container");
+let totalItems = data.items.length;
 
-data.map(el => {
-    let element;
-    if(el.type === "header"){
-        element = /*html*/`
-        <div class="hero">
-            <div class="notification">
-                <h2>${el.notification} </h2>
-                <p class="notification__count">0</p>
-            </div>
+// Header
+document.querySelector("#title").innerHTML = data.header.notification;
+document.querySelector(".notification__count").innerHTML = totalItems;
+document.querySelector(".mark").innerHTML = data.header.markRead;
+
+// Items
+data.items.map(el => {
+container.innerHTML += /*html*/`
+    <div class="item">
+        <div class="item__content active">
             <div>
-                <p class="mark">${el.markRead}</p>
+                <img class="item__image" src="${el.profilePicture}" alt="${el.name}">
             </div>
-        </div>`
-    } else if (el.type === "reaction"){
-        element = /*html*/`
-        <div class="main-js">
-            <div class="main-js__content active">
-                <div>
-                    <img class="main-js__image" src="${el.profilePicture}" alt="ramdom">
-                </div>
-                <div class="main-js__content__img-text">
-                    <div class="main-js__text">
-                        <div class="main-js__text__content">  
-                            <p class="main-js__text--data"> <span class="main-js__text--hover">${el.name}</span> <span class="main-js__text--gray">${el.actionText}</span> <span class="main-js__text--hover">${el.actionResult} <span class="unseen">&bull;</span></span></p>
-                        </div> 
-                        <div class="main-js__text--time">
-                            <p>${el.createdAt}</p>
-                        </div>
+            <div class="item__content__img-text">
+                <div class="item__text">
+                    <div class="item__text__content">  
+                        <p class="item__text--data"> <span class="item__text--hover">${el.name}</span> <span class="item__text--gray">${el.actionText}</span> 
+                            ${el.actionResult ? `
+                                <span class="item__text--hover">${el.actionResult}</span>
+                                ` : ""}
+                            <span class="bullet unseen">&bull;</span>
+                        </p>
+                    </div> 
+                    <div class="item__text--time">
+                        <p>${el.createdAt}</p>
                     </div>
+                    ${el.messagePreview ? `
+                        <div class="item__message">
+                            <p class="item__message--text">${el.messagePreview}</p>
+                        </div>
+                    ` : ""}
                 </div>
             </div>
-        </div>`
-    } else if (el.type === "follow"){
-        element = /*html*/`
-        <div class="main-js">
-            <div class="main-js__content active">
-                <div>
-                    <img class="main-js__image" src="${el.profilePicture}" alt="ramdom">
-                </div>
-                <div class="main-js__content__img-text">
-                    <div class="main-js__text">
-                        <div class="main-js__text__content">  
-                            <p class="main-js__text--data"> <span class="main-js__text--hover">${el.name}</span> <span class="main-js__text--gray">${el.actionText} <span class="unseen">&bull;</span></span></p>
-                        </div> 
-                        <div class="main-js__text--time">
-                            <p>${el.createdAt}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`
-    } else if (el.type === "joined-group"){
-        element = /*html*/`
-        <div class="main-js">
-            <div class="main-js__content active">
-                <div>
-                    <img class="main-js__image" src="${el.profilePicture}" alt="ramdom">
-                </div>
-                <div class="main-js__content__img-text">
-                    <div class="main-js__text">
-                        <div class="main-js__text__content">  
-                            <p class="main-js__text--data"> <span class="main-js__text--hover">${el.name}</span> <span class="main-js__text--gray">${el.actionText}</span> <span class="main-js__text--hover">${el.actionResult} <span class="unseen">&bull;</span></span></p>
-                        </div> 
-                        <div class="main-js__text--time">
-                            <p>${el.createdAt}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`
-    } else if (el.type === "dm"){
-        element = /*html*/`
-         <div class="main-js">
-            <div class="main-js__content active">
-                <div>
-                    <img class="main-js__image" src="${el.profilePicture}" alt="ramdom">
-                </div>
-                <div class="main-js__content__img-text">
-                    <div class="main-js__text">
-                        <div class="main-js__text__content">  
-                            <p class="main-js__text--data"> <span class="main-js__text--hover">${el.name}</span> <span class="main-js__text--gray">${el.actionText} <span class="unseen">&bull;</span></span></p>
-                        </div> 
-                        <div class="main-js__text--time">
-                            <p>${el.createdAt}</p>
-                        </div>
-                        <div class="main-js__message">
-                            <p class="main-js__message--text">${el.messagePreview}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`
-    } else if (el.type === "comment"){
-        element = /*html*/`
-         <div class="main-js">
-            <div class="main-js__content active">
-                <div>
-                    <img class="main-js__image" src="${el.profilePicture}" alt="ramdom">
-                </div>
-                <div class="main-js__content__img-text">
-                    <div class="main-js__text">
-                        <div class="main-js__text__content">  
-                            <p class="main-js__text--data"> <span class="main-js__text--hover">${el.name}</span> <span class="main-js__text--gray">${el.actionText} <span class="unseen">&bull;</span></span></p>
-                        </div> 
-                        <div class="main-js__text--time">
-                            <p>${el.createdAt}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="main-js__image">
-                    <img class="main-js__image--comment" src="${el.commentedPostImage}" alt="ramdom">
-                </div>
-            </div>
-        </div>`
-    } else if (el.type === "leaving-group"){
-        element = /*html*/`
-        <div class="main-js">
-            <div class="main-js__content active">
-                <div>
-                    <img class="main-js__image" src="${el.profilePicture}" alt="ramdom">
-                </div>
-                <div class="main-js__content__img-text">
-                    <div class="main-js__text">
-                        <div class="main-js__text__content">  
-                            <p class="main-js__text--data"> <span class="main-js__text--hover">${el.name}</span> <span class="main-js__text--gray">${el.actionText}</span> <span class="main-js__text--hover">${el.actionResult} <span class="unseen">&bull;</span></span></p>
-                        </div> 
-                        <div class="main-js__text--time">
-                            <p>${el.createdAt}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`
-    }
-    
-container.innerHTML += element
-
+            ${el.commentedPostImage ? `<div class="item__image">
+            <img class="item__image--comment" src="${el.commentedPostImage}" alt="random">
+        </div>` : ""}
+        </div>
+    </div>`;
 })
 
-const onClick = document.querySelectorAll(".main-js")
-const mark = document.querySelector(".mark")
-const notiCount = document.querySelector(".notification__count")
+const itemsLoadedList = document.querySelectorAll(".item")
+const markElement = document.querySelector(".mark")
+const notificationCountElement = document.querySelector(".notification__count")
 
-let accountant = onClick.length;
-
-const count = () => {
-    accountant--
-    if(accountant < 0){
-        return 0
-    } else return notiCount.textContent = accountant
+const decreaseCounter = () => {
+    totalItems--
+    if (totalItems < 0) return 0;
+    return notificationCountElement.textContent = totalItems
 }
 
-const countAll = () => {
-    accountant = 0
-    return notiCount.textContent = accountant
+const setCounterToZero = () => {
+    totalItems = 0
+    return notificationCountElement.textContent = totalItems
+}
+
+const itemObject = (el) => {
+    el.querySelector(".item__content").classList.remove("active")
+    el.querySelector(".item__content").classList.add("inactive")
+    el.querySelector(".bullet").classList.add("seen")
+    el.querySelector(".bullet").classList.remove("unseen")
+    el.querySelector(".item__message--text")?.classList.add("active-text")
 }
 
 
-onClick.forEach(el => {
+itemsLoadedList.forEach(el => {
     el.addEventListener("click", () => {
-        el.querySelector(".main-js__content").classList.add("inactive")
-        el.querySelector(".unseen").classList.add("seen")
-        el.querySelector(".main-js__message--text").classList.add("active-text")
+        if (el.querySelector(".item__content").classList.contains("active")) {
+            decreaseCounter()
+        }
+        itemObject(el)
     })
-
-    mark.addEventListener("click", () => {
-        el.querySelector(".main-js__content").classList.add("inactive")
-        el.querySelector(".unseen").classList.add("seen")
-        el.querySelector(".main-js__message--text").classList.add("active-text")
-    })
-    
-    el.addEventListener("click", count)
-    mark.addEventListener("click", countAll)
-
-    notiCount.textContent = accountant
-
 })
+
+markElement.addEventListener("click", () => {
+    setCounterToZero()
+    itemsLoadedList.forEach(item => {
+        itemObject(item)
+    })
+});

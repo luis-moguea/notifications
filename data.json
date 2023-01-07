@@ -1,31 +1,27 @@
-[
-    {
-        "type": "header",
+{
+    "header": {
         "notification": "Notifications",
-        "notificationCount": "3",
         "markRead": "Mark all as read"
     },
-    {
-      "type": "reaction",
-      "id": 1,
-      "name": "Mark Webber",
-      "profilePicture": "images/avatar-mark-webber.webp",
-      "actionText": "reacted to your recent post",
-      "actionResult": "My first tournament today!",
-      "seen": false,
-      "createdAt": "1m ago"
-    },
-    {
-      "type": "follow",
-      "id": 2,
-      "name": "Angela Gray",
-      "profilePicture": "images/avatar-angela-gray.webp",
-      "actionText": "followed you",
-      "seen": false,
-      "createdAt": "5m ago"
-    },
-    {
-        "type": "joined-group",
+    "items": [
+      {
+        "id": 1,
+        "name": "Mark Webber",
+        "profilePicture": "images/avatar-mark-webber.webp",
+        "actionText": "reacted to your recent post",
+        "actionResult": "My first tournament today!",
+        "seen": false,
+        "createdAt": "1m ago"
+      },
+      {
+        "id": 2,
+        "name": "Angela Gray",
+        "profilePicture": "images/avatar-angela-gray.webp",
+        "actionText": "followed you",
+        "seen": false,
+        "createdAt": "5m ago"
+      },
+      {
         "id": 3,
         "name": "Jacob Thompsom",
         "profilePicture": "images/avatar-jacob-thompson.webp",
@@ -35,7 +31,6 @@
         "createdAt": "1 day ago"
       },
       {
-        "type": "dm",
         "id": 4,
         "name": "Rizky Hasanuddin",
         "profilePicture": "images/avatar-rizky-hasanuddin.webp",
@@ -45,7 +40,6 @@
         "messagePreview": "Hello, thanks for setting up the Chess Club I've been a member for a few weeks now and I'm already havings lots of fun and improving my game."
       },
       {
-        "type": "comment",
         "id": 5,
         "name": "Mark Webber",
         "profilePicture": "images/avatar-Kimberly-Smith.webp",
@@ -55,7 +49,6 @@
         "commentedPostImage": "images/image-chess.webp"
       },
       {
-        "type": "reaction",
         "id": 6,
         "name": "Nathan Peterson",
         "profilePicture": "images/avatar-nathan-peterson.webp",
@@ -65,7 +58,6 @@
         "createdAt": "2 weeks ago"
       },
       {
-        "type": "leaving-group",
         "id": 7,
         "name": "Anna Kim",
         "profilePicture": "images/avatar-anna-kim.webp",
@@ -74,4 +66,5 @@
         "seen": true,
         "createdAt": "2 weeks ago"
       }
-  ]
+    ]
+}

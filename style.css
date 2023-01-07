@@ -53,40 +53,40 @@ body{
     color: #0a317b;
 }
 
-.main-js__image{
+.item__image{
     width: 40px;
     margin-top: 10px;
     cursor: pointer;
     padding-left: 0.8em;
 }
 
-.main-js__text{
+.item__text{
     display: block;
 }
 
-.main-js__text__content{
+.item__text__content{
     display: flex;
     margin-left: 10px;
 }
 
-.main-js__text--data{
+.item__text--data{
     margin-bottom: -5px;
 }
 
-.main-js__text--time{
+.item__text--time{
     color: #939dae;
     margin-left: 10px;
     margin-top: 0;
     padding-top: 0;
 }
 
-.main-js__content__img-text{
+.item__content__img-text{
     padding-right: 0;
     margin-right: 0;
 }
 
 
-.main-js__message--text{
+.item__message--text{
     display: none;
     box-sizing: border-box;
     text-align:inherit;
@@ -103,16 +103,16 @@ body{
     transition: 0.12s;
 }
 
-.main-js__image--comment{
+.item__image--comment{
     width: 40px;
     margin-left: 110px;
 }
 
-.main-js{
+.item{
     padding-bottom: 0.7em;
 }
 
-.main-js__content{
+.item__content{
     display: flex;
     background-color: #e5effa;
     border-radius: 6px;
@@ -135,16 +135,16 @@ body{
     transition: 0.8s;
 }
 
-.main-js__text--gray{
+.item__text--gray{
     color: #5e6778;
 }
 
-.main-js__text--hover{
+.item__text--hover{
     font-weight: bold;
     cursor: pointer;
     padding-right: 0;
 }
 
-.main-js__text--hover:hover{
+.item__text--hover:hover{
     color: #0a317b;
 }
