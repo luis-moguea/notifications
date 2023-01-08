@@ -1,6 +1,21 @@
 import data from './data.json' assert { type: 'json' };
 
+// Components
+import { bulletComponent } from "./components/bullet.js";
+import { actionResultComponent } from "./components/actionResult.js";
+import { actionTextComponent } from "./components/actionText.js";
+import { messagePreviewComponent } from "./components/messagePreview.js";
+import { commentedPostImageComponent } from "./components/commentedPostImage.js";
+import { createdAtComponent } from "./components/createdAt.js";
+import { profilePictureComponent } from "./components/profilePicture.js";
+
+// Utils for the notification item
+import { decreaseCounter } from "./utils/decreaseCounter.js";
+import { setCounterToZero } from "./utils/setCounterToZero.js";
+
+// Container to inject items
 const container = document.querySelector("#container");
+// Counter handler
 let totalItems = data.items.length;
 
 // Header
@@ -10,35 +25,25 @@ document.querySelector(".mark").innerHTML = data.header.markRead;
 
 // Items
 data.items.map(el => {
-container.innerHTML += /*html*/`
+    container.innerHTML += /*html*/`
     <div class="item">
         <div class="item__content active">
-            <div>
-                <img class="item__image" src="${el.profilePicture}" alt="${el.name}">
-            </div>
+           ${profilePictureComponent(el)}
             <div class="item__content__img-text">
                 <div class="item__text">
                     <div class="item__text__content">  
-                        <p class="item__text--data"> <span class="item__text--hover">${el.name}</span> <span class="item__text--gray">${el.actionText}</span> 
-                            ${el.actionResult ? `
-                                <span class="item__text--hover">${el.actionResult}</span>
-                                ` : ""}
-                            <span class="bullet unseen">&bull;</span>
+                        <p class="item__text--data"> <span class="item__text--hover">${el.name}</span> ${actionTextComponent(el)}  
+                            ${el.actionResult ? `${actionResultComponent(el)}` : ""}
+                           ${bulletComponent(el)}
                         </p>
-                    </div> 
-                    <div class="item__text--time">
-                        <p>${el.createdAt}</p>
                     </div>
+                    ${createdAtComponent(el)}
                     ${el.messagePreview ? `
-                        <div class="item__message">
-                            <p class="item__message--text">${el.messagePreview}</p>
-                        </div>
+                       ${messagePreviewComponent(el)}
                     ` : ""}
                 </div>
             </div>
-            ${el.commentedPostImage ? `<div class="item__image">
-            <img class="item__image--comment" src="${el.commentedPostImage}" alt="random">
-        </div>` : ""}
+            ${el.commentedPostImage ? `${commentedPostImageComponent(el)}` : ""}
         </div>
     </div>`;
 })
@@ -47,17 +52,13 @@ const itemsLoadedList = document.querySelectorAll(".item")
 const markElement = document.querySelector(".mark")
 const notificationCountElement = document.querySelector(".notification__count")
 
-const decreaseCounter = () => {
-    totalItems--
-    if (totalItems < 0) return 0;
-    return notificationCountElement.textContent = totalItems
-}
 
-const setCounterToZero = () => {
-    totalItems = 0
-    return notificationCountElement.textContent = totalItems
-}
 
+
+/**
+ * Renders the notification item as read
+ * @param {HTMLElement} el - item
+ */
 const itemObjectHTML = (el) => {
     el.querySelector(".item__content").classList.remove("active")
     el.querySelector(".item__content").classList.add("inactive")
@@ -70,15 +71,18 @@ const itemObjectHTML = (el) => {
 itemsLoadedList.forEach(el => {
     el.addEventListener("click", () => {
         if (el.querySelector(".item__content").classList.contains("active")) {
-            decreaseCounter()
+            // Setting totalItems with new value
+            totalItems = decreaseCounter(totalItems, notificationCountElement)
         }
+        // Change the item to inactive
         itemObjectHTML(el)
     })
 })
 
 // Click listener
 markElement.addEventListener("click", () => {
-    setCounterToZero()
+    totalItems = setCounterToZero(totalItems, notificationCountElement)
+    // Changing all items to inactive after user clicks on "Mark all as read"
     itemsLoadedList.forEach(item => {
         itemObjectHTML(item)
     })
