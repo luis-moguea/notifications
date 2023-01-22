@@ -1,4 +1,4 @@
-import data from './data.json' assert { type: 'json' };
+import {data} from './data.js';
 
 // Components
 import { bulletComponent } from "./components/bullet.js";
