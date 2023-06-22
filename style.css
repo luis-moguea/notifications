@@ -148,3 +148,11 @@ body{
 .item__text--hover:hover{
     color: #0a317b;
 }
+
+
+@media all and (max-width: 780px){
+    .item__image--comment {
+        width: 40px;
+        margin-left: -10px;
+    }
+}
